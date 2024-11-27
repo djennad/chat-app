@@ -1,0 +1,7 @@
+*.pyc
+__pycache__/
+.env
+chat.db
+venv/
+.vscode/
+.idea/

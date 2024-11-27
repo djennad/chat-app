@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة المستخدمين</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .users-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .user-card {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            transition: background-color 0.2s;
+        }
+        .user-card:hover {
+            background-color: #f8f9fa;
+        }
+        .user-card:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="users-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>قائمة المستخدمين</h2>
+                <div>
+                    <a href="{{ url_for('chat') }}" class="btn btn-outline-primary me-2">غرفة الدردشة العامة</a>
+                    <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">تسجيل خروج</a>
+                </div>
+            </div>
+            
+            {% if users %}
+                {% for user in users %}
+                    <div class="user-card d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-0">{{ user.username }}</h5>
+                        </div>
+                        <a href="{{ url_for('private_chat', user_id=user.id) }}" class="btn btn-primary">بدء محادثة</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">لا يوجد مستخدمين متاحين حالياً</div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
